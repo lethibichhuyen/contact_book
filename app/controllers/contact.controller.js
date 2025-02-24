@@ -85,7 +85,7 @@ exports.update = async (req, res, next) => {
     }
     try {
         const contactService = new ContactService(MongoDB.client);
-        const document = await conta .update(req.params.id, req.body);
+        const document = await contactService.update(req.params.id, req.body);
         if (!document) {
             return next(new ApiError(404, "Contact not found"));
         }
@@ -115,7 +115,7 @@ exports.delete = async (req, res, next) => {
 exports.findAllFavorite = async (_req, res, next) => {
     try{
         const contactService = new ContactService(MongoDB.client);
-        const document = await contactService.findFavorite();
+        const documents = await contactService.findFavorite();
         return res.send(documents);
     } catch (error){
         return next(
